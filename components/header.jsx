@@ -2,7 +2,15 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
-
+import {
+    ClerkProvider,
+    SignInButton,
+    SignUpButton,
+    SignedIn,
+    SignedOut,
+    UserButton,
+} from '@clerk/nextjs'
+import { Button } from './ui/button'
 const Header = () => {
     const path = usePathname()
     return (
@@ -31,8 +39,24 @@ const Header = () => {
                         </Link>
                     </div>
                 )}
+                <div className='flex items-center gap-3 ml-10 md:ml-20'>
+                    <SignedOut>
+                        <SignInButton>
+                            <Button variant="glass" className="hidden sm:flex">Sign In</Button>
+                        </SignInButton>
+                        <SignUpButton>
+                            {/* <button  className="bg-[#6c47ff] text-white rounded-full font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 cursor-pointer">
+                                Sign Up
+                            </button> */}
+                            <Button variant="primary" >Get Started</Button>
+                        </SignUpButton>
+                    </SignedOut>
+                    <SignedIn>
+                        <UserButton />
+                    </SignedIn>
+                </div>
             </div>
-        </header>
+        </header >
     )
 }
 
