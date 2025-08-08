@@ -11,8 +11,15 @@ import {
     UserButton,
 } from '@clerk/nextjs'
 import { Button } from './ui/button'
+import useStoreUserEffect from '@/hooks/use-store-user'
+import { BarLoader } from 'react-spinners'
+
 const Header = () => {
     const path = usePathname()
+    const { isLoading } = useStoreUserEffect()
+    if (path.includes('/editor')) {
+        return null;
+    }
     return (
         <header className='fixed top-6 left-1/2 transform -translate-x-1/2 z-50 text-nowrap'>
             <div className='backdrop-blur-md bg-white/10 border-white/20 rounded-full px-8 py-3 flex items-center justify-between gap-8'>
@@ -59,6 +66,7 @@ const Header = () => {
                         }} />
                     </SignedIn>
                 </div>
+                {true && <BarLoader />}
             </div>
         </header >
     )
