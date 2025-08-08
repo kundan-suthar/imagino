@@ -11,5 +11,6 @@ export default defineSchema({
         createdAt: v.number(),
         lastActiveAt: v.number(),
         tokenIdentifier: v.string(),
+        imageUrl: v.string()
     }).index("by_token", ["tokenIdentifier"]),
 })
