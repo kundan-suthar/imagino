@@ -3,16 +3,14 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
 import {
-    ClerkProvider,
     SignInButton,
     SignUpButton,
-    SignedIn,
-    SignedOut,
     UserButton,
 } from '@clerk/nextjs'
 import { Button } from './ui/button'
 import useStoreUserEffect from '@/hooks/use-store-user'
 import { BarLoader } from 'react-spinners'
+import { Authenticated, Unauthenticated } from 'convex/react'
 
 const Header = () => {
     const path = usePathname()
@@ -47,7 +45,7 @@ const Header = () => {
                     </div>
                 )}
                 <div className='flex items-center gap-3 ml-10 md:ml-20'>
-                    <SignedOut>
+                    <Unauthenticated>
                         <SignInButton>
                             <Button variant="glass" className="hidden sm:flex">Sign In</Button>
                         </SignInButton>
@@ -57,14 +55,14 @@ const Header = () => {
                             </button> */}
                             <Button variant="primary" >Get Started</Button>
                         </SignUpButton>
-                    </SignedOut>
-                    <SignedIn>
+                    </Unauthenticated>
+                    <Authenticated>
                         <UserButton appearance={{
                             elements: {
                                 avatarBox: 'w-8 h-8'
                             }
                         }} />
-                    </SignedIn>
+                    </Authenticated>
                 </div>
                 {isLoading &&
                     <div className='fixed bottom-0 left-0 w-full z-40 flex justify-center'>
